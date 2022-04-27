@@ -4,10 +4,8 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_proxy import WebDriverProxy
 
-options = Options()
-options.headless = True
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-driver = WebDriverProxy(driver)
+driver = webdriver.Chrome(ChromeDriverManager().install())
+driver = WebDriverProxy(driver, "C:/Users/angel/OneDrive/Documentos/projects/pyshot/screenshots")
 
 driver.maximize_window()
 driver.get("https://duckduckgo.com/")
