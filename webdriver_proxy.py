@@ -9,22 +9,34 @@ from webelement_proxy import WebElementProxy
 class WebDriverProxy(WebDriver):
 
     screenshots_path = ""
+    __screenshots_enabled = True
+    only_pyshot_steps = False
 
-    def __init__(self, webdriver: WebDriver, screenshots_path: str = ""):
+    def __init__(self, webdriver: WebDriver):
         self.__dict__.update(webdriver.__dict__)
 
-        if not self.screenshots_path:
-            self.set_screenshots_path(screenshots_path)
+    @classmethod
+    def get_timestamp(cls) -> str:
+        return datetime.now().strftime("%Y-%m-%d_%H-%M-%S_%f")
 
-    def set_screenshots_path(self, path: str) -> None:
-        self.screenshots_path = path
+    @classmethod
+    def enable_screenshots(cls):
+        cls.__screenshots_enabled = True
 
-        if not os.path.exists(path):
+    @classmethod
+    def disable_screenshots(cls):
+        cls.__screenshots_enabled = False
+
+    @classmethod
+    def set_screenshots_path(cls, path: str) -> None:
+        cls.screenshots_path = path
+
+        if not os.path.exists(path) and path:
             os.makedirs(path)
 
     def save_screenshot(self, filename="") -> None:
-        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S_%f")
-        super().save_screenshot(f"{self.screenshots_path}/{timestamp}.png")
+        if self.__screenshots_enabled:
+            super().save_screenshot(f"{self.screenshots_path}/{self.get_timestamp()}.png")
 
     def get(self, url: str) -> None:
         super().get(url)

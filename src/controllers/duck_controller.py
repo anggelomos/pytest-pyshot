@@ -1,4 +1,5 @@
 from config import duck_search_page_url
+from conftest import pyshot_step
 from src.pages.base_page import BasePage
 from src.pages.results_page import ResultsPage
 from src.pages.search_page import SearchPage
@@ -11,6 +12,7 @@ class DuckController:
         BasePage.driver.get(duck_search_page_url)
 
     @classmethod
+    @pyshot_step
     def search(cls, search_text: str):
         SearchPage.enter_search_text(search_text)
         SearchPage.make_search()
@@ -23,7 +25,7 @@ class DuckController:
     @classmethod
     def verify_search_result(cls, search_text: str):
         first_result = ResultsPage.get_result_list()[0]
-        return search_text in first_result.text
+        return search_text.lower() in first_result.text.lower()
 
     @classmethod
     def verify_image_search_result(cls):
