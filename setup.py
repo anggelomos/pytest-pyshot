@@ -10,7 +10,7 @@ with open("README.md", "r") as readme:
 setup(
     name="pyshot",
     url="https://github.com/anggelomos/pyshot",
-    version="0.0.1",
+    version="0.0.2",
     author="anggelomos",
     author_email="anggelomos@outlook.com",
     description="Pytest plugin to facilitate screenshot taking with selenium webdriver",
@@ -23,7 +23,7 @@ setup(
         "Programming Language :: Python :: 3.8",
     ],
     license="MIT License",
-    py_modules=["pyshot"],
+    py_modules=["pyshot", "webdriver_proxy", "webelement_proxy"],
     package_dir={'': 'src'},
     keywords=[
         "pytest", "py.test", "pyshot", "screenshot", "selenium", "test", "plugin"
