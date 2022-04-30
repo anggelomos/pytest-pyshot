@@ -50,4 +50,6 @@ pytest test_example.py --pyshot_conf=usr/test/pyshot.conf
 ## Demo
 You can check the pyshot example repo to see a small demo project.
 
+https://youtu.be/C1rKgZn5tJg
+
 https://github.com/anggelomos/pyshot-example
